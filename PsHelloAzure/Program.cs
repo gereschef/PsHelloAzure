@@ -17,27 +17,12 @@ namespace PsHelloAzure
     {
         public static void Main(string[] args)
         {
-            var host = BuildWebhost(args);
-            MigrateDatabase(host);
-            host.Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static void MigrateDatabase(IWebHost host)
-        {
-            using (var scope = host.Services.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                context.Database.Migrate();
-            }
-        }
-
-        public static IWebHost BuildWebhost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>()
-            .Build();
-        [Obsolete]
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
     }
 }
+
