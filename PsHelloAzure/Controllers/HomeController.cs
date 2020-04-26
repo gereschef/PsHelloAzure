@@ -38,6 +38,10 @@ namespace PsHelloAzure.Controllers
             return View();
         }
 
+        public IActionResult Test()
+        {
+            throw new InvalidOperationException("Sorry, this feature is not supported!");
+        }
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
